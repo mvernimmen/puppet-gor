@@ -4,21 +4,27 @@
 #
 # === Parameters
 #
-# [*args*]
-#   Hash of arguments to run Gor with. Values will be single quoted.
-#
-# [*package_ensure*]
+# [*ensure*]
 #   Ensure parameter to pass to the package.
 #   Default: present
+#
+# [*version*]
+#   version of the package.
+#   Default: 0.10.0
 #
 # [*service_ensure*]
 #   Ensure parameter to pass to the service.
 #   Default: running
 #
+# [*args*]
+#   Hash of arguments to run Gor with. Values will be single quoted.
+#
+#
 class gor (
-  $args,
-  $package_ensure = present,
-  $service_ensure = running,
+  $ensure         = present,
+  $version        = '0.10.0',
+  $service_ensure = stopped,
+  $args           = undef
 ) {
   validate_hash($args)
   if empty($args) {
