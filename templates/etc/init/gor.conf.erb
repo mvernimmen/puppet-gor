@@ -6,11 +6,12 @@ stop on runlevel [!2345]
 respawn
 respawn limit 5 20
 
-exec /usr/bin/gor \
+exec /usr/local/bin/gor \
   <%=
 @args.sort.map { |k,v|
   [v].flatten.map { |i|
     "#{k}='#{i}'"
   }
 }.join(" \\\n  ")
-%>
+%> \
+>> /var/log/gor/gor.log 2>&1
