@@ -22,14 +22,13 @@
 #
 class gor (
   $ensure         = present,
-  $version        = '0.10.0',
-  $service_ensure = stopped,
-  $args           = undef
+  $version        = '0.10.1',
+  $digest_string  = '6d7a23e5ae97edec6fa389cdee9546be',
+  $digest_type    = 'md5',
+  $service_ensure = running,
+  $args           = {}
 ) {
   validate_hash($args)
-  if empty($args) {
-    fail("${title}: args param is empty")
-  }
 
   anchor { 'gor::begin': } ->
   class { 'gor::package': } ->
