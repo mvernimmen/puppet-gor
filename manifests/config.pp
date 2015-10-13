@@ -3,11 +3,20 @@
 # Private class. Should not be called directly.
 #
 class gor::config {
-  $ensure = $::gor::ensure
   $args   = $::gor::args
+  if empty($args) {
+    $ensure = absent
+  } else {
+    $ensure = $::gor::ensure
+  }
+
+  $log_ensure = $ensure ? {
+    present => directory,
+    default => absent,
+  }
 
   file { '/var/log/gor':
-    ensure => directory,
+    ensure => $log_ensure,
     mode   => '0755',
   }
 
