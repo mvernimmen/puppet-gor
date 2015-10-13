@@ -11,9 +11,11 @@ Pass some arguments:
 ```puppet
 class { 'gor':
   args => {
-    '-input-raw'          => 'localhost:7999',
-    '-output-http-header' => 'User-Agent: gor',
-    '-output-http'        => 'https://staging.example.com',
+    '-input-raw'             => 'localhost:7999',
+    '-output-http-header'    => 'User-Agent: gor',
+    '-output-http'           => 'https://staging.example.com',
+    '-output-http-redirects' => 2,
+    '-output-http-timeout'   => '120s'
   },
 }
 ```
@@ -31,9 +33,12 @@ class { 'gor':
 ```
 
 To install a specific version of the Gor package:
+check https://github.com/buger/gor/releases
 ```puppet
 class { 'gor':
-  package_ensure => '1.2.3',
+  version       => '0.10.1',
+  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
+  digest_type   => 'md5',
   …
 }
 ```
@@ -43,6 +48,48 @@ To prevent the service from starting:
 class { 'gor':
   service_ensure => 'stopped',
   …
+}
+```
+
+To install only the Gor package without having a gor service running:
+```puppet
+class { 'gor':
+  version       => '0.10.1',
+  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
+  digest_type   => 'md5'
+}
+```
+
+To install the Gor package with a gor service but that can only be started manually:
+```puppet
+class { 'gor':
+  version       => '0.10.1',
+  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
+  digest_type   => 'md5',
+  service_ensure => 'stopped',
+  args => {
+    '-input-raw'             => 'localhost:7999',
+    '-output-http-header'    => 'User-Agent: gor',
+    '-output-http'           => 'https://staging.example.com',
+    '-output-http-redirects' => 2,
+    '-output-http-timeout'   => '120s'
+  },
+}
+```
+
+To install the Gor package with a gor service running that always send requests to https://staging.example.com
+```puppet
+class { 'gor':
+  version       => '0.10.1',
+  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
+  digest_type   => 'md5',
+  args => {
+    '-input-raw'             => 'localhost:7999',
+    '-output-http-header'    => 'User-Agent: gor',
+    '-output-http'           => 'https://staging.example.com',
+    '-output-http-redirects' => 2,
+    '-output-http-timeout'   => '120s'
+  },
 }
 ```
 
