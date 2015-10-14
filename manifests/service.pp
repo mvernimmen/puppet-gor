@@ -3,8 +3,8 @@
 # Private class. Should not be called directly.
 #
 class gor::service {
-  $args           = $::gor::args
-  
+  $args = $::gor::args
+
   if empty($args) {
     $override_ensure = absent
     $service_enable = false
