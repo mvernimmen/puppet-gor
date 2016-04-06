@@ -12,16 +12,27 @@ class gor::service {
     $ensure = present
     $service_ensure = $::gor::service_ensure
     $service_enable = $service_ensure ? {
-      stopped => false,
+      'stopped' => false,
       false   => false,
       default => true,
     }
   }
 
+  if $::osfamily == 'RedHat' and $::operatingsystem != 'Fedora' {
+    if $::operatingsystemrelease =~ /^6.*/  {
+      $provider = 'upstart'
+    } elsif $::operatingsystemrelease =~ /^7.*/  {
+      $provider = 'systemd'
+    }
+  }
+
+
   if !$service_enable {
-    file { '/etc/init/gor.override':
-      ensure  => $override_ensure,
-      content => "start on manual\nstop on manual"
+    if $provider == 'upstart' {
+      file { '/etc/init/gor.override':
+        ensure  => $override_ensure,
+        content => "start on manual\nstop on manual",
+      }
     }
   } else {
     # don't try to stop the service if it was started through capistrano
@@ -33,7 +44,7 @@ class gor::service {
       enable     => $service_enable,
       hasstatus  => true,
       hasrestart => false,
-      provider   => 'upstart',
+      provider   => $provider,
     }
   }
 }

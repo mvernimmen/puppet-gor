@@ -20,9 +20,25 @@ class gor::config {
     mode   => '0755',
   }
 
-  file { '/etc/init/gor.conf':
-    ensure  => $ensure,
-    content => template('gor/etc/init/gor.conf.erb'),
-    require => File['/var/log/gor']
+  if $::osfamily == 'RedHat' and $::operatingsystem != 'Fedora' {
+    if $::operatingsystemrelease =~ /^6.*/  {
+      file { 'gor-conf':
+        ensure  => $ensure,
+        path    => '/etc/init/gor.conf',
+        mode    => '0644',
+        content => template('gor/gor.upstart.erb'),
+        require => File['/var/log/gor'],
+      }
+    } elsif $::operatingsystemrelease =~ /^7.*/  {
+      file { 'gor-conf':
+        ensure  => $ensure,
+        path    => '/lib/systemd/system/gor.service',
+        mode    => '0644',
+        content => template('gor/gor.systemd.erb'),
+        require => File['/var/log/gor'],
+      }
+    }
   }
+
+
 }

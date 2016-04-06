@@ -1,0 +1,18 @@
+[Unit]
+Description=Gor traffic replay
+After=network.target
+Wants=network.target
+
+[Service]
+ExecStart=/usr/local/bin/gor \
+  <%=
+@args.sort.map { |k,v|
+  [v].flatten.map { |i|
+    "#{k}='#{i}'"
+  }
+}.join(" \\\n  ")
+%> \
+>> /var/log/gor/gor.log 2>&1
+
+[Install]
+WantedBy=multi-user.target
