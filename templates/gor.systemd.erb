@@ -4,7 +4,10 @@ After=network.target
 Wants=network.target
 
 [Service]
-ExecStart=/usr/local/bin/gor \
+<%  @envvars.each do |k, v| %>
+<%="Environment=#{k}='#{v}'" -%>
+<%  end %>
+ExecStart=<%= @binary_path %> \
   <%=
 @args.sort.map { |k,v|
   [v].flatten.map { |i|

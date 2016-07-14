@@ -10,6 +10,9 @@ class gor::config {
     $ensure = $::gor::ensure
   }
 
+  $envvars     = $::gor::envvars
+  $binary_path = $::gor::binary_path
+
   $log_ensure = $ensure ? {
     present => directory,
     default => absent,
