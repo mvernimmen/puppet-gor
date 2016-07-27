@@ -1,0 +1,32 @@
+{
+  "name": "meltwater-gor",
+  "version": "0.3.0",
+  "author": "meltwater",
+  "summary": "Puppet module for installing and configuring the Gor replay tool.",
+  "description": "Puppet module for installing and configuring the Gor replay tool.",
+  "license": "MIT",
+  "source": "https://github.com/meltwater/puppet-gor",
+  "project_page": "https://github.com/meltwater/puppet-gor",
+  "issues_url": "https://github.com/meltwater/puppet-gor/issues",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease":[ "6.0", "7.0" ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [ "14.04", "12.04" ]
+    }
+  ],
+  "tags": [ "gor", "gortool", "http", "capture", "replay", "traffic" ],
+  "dependencies": [
+    {
+      "name":"puppetlabs-stdlib",
+      "version_requirement":">= 2.2.0"
+    },
+    {
+      "name":"camptocamp-archive",
+      "version_requirement":">= 0.8.x"
+    }
+  ]
+}
