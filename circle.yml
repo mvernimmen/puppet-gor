@@ -1,0 +1,31 @@
+machine:
+  environment:
+    BUNDLE_WITHOUT: "production staging qa development deployer"
+
+dependencies:
+  cache_directories:
+    - '~/.rvm/rubies'
+    - 'vendor'
+  pre:
+    - rm Gemfile.lock || true
+  override:
+    - rvm-exec 1.9.3 bash -c "bundle check --path=vendor/bundle_1.9.3 || bundle install --path=vendor/bundle_1.9.3"
+    - rvm-exec 2.0.0 bash -c "bundle check --path=vendor/bundle_2.0.0 || bundle install --path=vendor/bundle_2.0.0"
+    - rvm-exec 2.1.0 bash -c "bundle check --path=vendor/bundle_2.1.0 || bundle install --path=vendor/bundle_2.1.0"
+    - rvm-exec 2.1.8 bash -c "bundle check --path=vendor/bundle_2.1.8 || bundle install --path=vendor/bundle_2.1.8"
+    - rvm-exec 2.2.4 bash -c "bundle check --path=vendor/bundle_2.2.4 || bundle install --path=vendor/bundle_2.2.4"
+    - rvm-exec 2.3.0 bash -c "bundle check --path=vendor/bundle_2.3.0 || bundle install --path=vendor/bundle_2.3.0"
+
+test:
+  override:
+    - PUPPET_VERSION='~> 3.3.0' rvm-exec 1.9.3 bundle exec rake
+    - PUPPET_VERSION='~> 3.0' FUTURE_PARSER='yes' rvm-exec 1.9.3 bundle exec rake
+    - PUPPET_VERSION='~> 3.3.0' rvm-exec 2.0.0 bundle exec rake
+    - PUPPET_VERSION='~> 3.0' FUTURE_PARSER='yes' rvm-exec 2.0.0 bundle exec rake
+    - PUPPET_VERSION='~> 3' rvm-exec 2.1.0 bundle exec rake
+    - PUPPET_VERSION='~> 4.0' rvm-exec 2.1.8 bundle exec rake
+    - PUPPET_VERSION='~> 4' FUTURE_PARSER='yes' rvm-exec 2.1.8 bundle exec rake
+    - PUPPET_VERSION='~> 4.0' rvm-exec 2.2.4 bundle exec rake
+    - PUPPET_VERSION='~> 4' FUTURE_PARSER='yes' rvm-exec 2.2.4 bundle exec rake
+    - PUPPET_VERSION='~> 4.0' rvm-exec 2.3.0 bundle exec rake
+    - PUPPET_VERSION='~> 4' FUTURE_PARSER='yes' rvm-exec 2.3.0 bundle exec rake
