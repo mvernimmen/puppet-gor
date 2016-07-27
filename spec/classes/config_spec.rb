@@ -1,7 +1,13 @@
 require 'spec_helper'
 
-describe 'gor' do
-  let(:upstart_file) { '/etc/init/gor.conf' }
+describe 'gor', :type => 'class' do
+  let(:upstart_file) { 'gor-conf' }
+  let(:facts) { {
+    :osfamily                  => 'RedHat',
+    :operatingsystem           => 'RedHat',
+    :operatingsystemmajrelease => '6',
+    :path                      => '/usr/local/bin:/usr/bin:/bin',
+  } }
 
   describe '#args' do
     context 'valid hash, non-alphabetical order' do
@@ -13,11 +19,10 @@ describe 'gor' do
         },
       }}
 
+      it { should compile.with_all_deps }
+
       it 'should configure gor with the correct arguments' do
-        should contain_file(upstart_file).with_content(/^exec \/usr\/bin\/gor \\
-  -input-raw=':80' \\
-  -output-http='http:\/\/staging' \\
-  -output-http-header='User-Agent: gor'$/)
+        should contain_file(upstart_file).with_content(/exec \/usr\/local\/bin\/gor \\\n\s{1,}-input-raw=':80' \\\n\s{1,}-output-http='http:\/\/staging' \\\n\s{1,}-output-http-header='User-Agent: gor'/)
       end
     end
 
@@ -33,12 +38,7 @@ describe 'gor' do
       }}
 
       it 'should configure gor with the correct arguments' do
-        should contain_file(upstart_file).with_content(/^exec \/usr\/bin\/gor \\
-  -input-raw=':80' \\
-  -output-http='http:\/\/staging' \\
-  -output-http-method='GET' \\
-  -output-http-method='HEAD' \\
-  -output-http-method='OPTIONS'$/)
+        should contain_file(upstart_file).with_content(/exec \/usr\/local\/bin\/gor \\\n\s{1,}-input-raw=':80' \\\n\s{1,}-output-http='http:\/\/staging' \\\n\s{1,}-output-http-method='GET' \\\n\s{1,}-output-http-method='HEAD' \\\n\s{1,}-output-http-method='OPTIONS'/)
       end
     end
 
@@ -52,10 +52,7 @@ describe 'gor' do
       }}
 
       it 'should not include an equals when the argument has no value' do
-        is_expected.to contain_file(upstart_file).with_content(/^exec \/usr\/bin\/gor \\
-  -http-original-host \\
-  -input-raw=':80' \\
-  -output-http='http:\/\/staging'$/)
+        is_expected.to contain_file(upstart_file).with_content(/exec \/usr\/local\/bin\/gor \\\n\s{1,}-http-original-host \\\n\s{1,}-input-raw=':80' \\\n\s{1,}-output-http='http:\/\/staging'/)
       end
     end
 
@@ -64,9 +61,7 @@ describe 'gor' do
         :args => 'somestring',
       }}
 
-      it do
-        expect { should }.to raise_error(Puppet::Error, /is not a Hash/)
-      end
+      it { expect { should compile }.to raise_error(/is not a Hash/) }
     end
 
     context 'empty hash' do
@@ -74,9 +69,7 @@ describe 'gor' do
         :args => {},
       }}
 
-      it do
-        expect { should }.to raise_error(Puppet::Error, /args param is empty/)
-      end
+      it { expect { should compile }.to raise_error(/args param is empty/) }
     end
   end
 
@@ -95,7 +88,7 @@ describe 'gor' do
       }}
 
       it 'should configure gor with correct environment variables in place' do
-        is_expected.to contain_file(upstart_file).with_content(/^env GODEBUG=\'netdns=go\'\nenv FOO=\'bar\'$/)
+        is_expected.to contain_file(upstart_file).with_content(/env GODEBUG=\'netdns=go\'\nenv FOO=\'bar\'/)
       end
     end
     context 'empty hash' do
@@ -109,7 +102,7 @@ describe 'gor' do
       }}
 
       it 'should configure gor without setting environment variables' do
-        is_expected.not_to contain_file(upstart_file).with_content(/^env GODEBUG=\'netdns=go\'\nenv FOO=\'bar\'$/)
+        is_expected.not_to contain_file(upstart_file).with_content(/env GODEBUG=\'netdns=go\'\nenv FOO=\'bar\'/)
       end
     end
   end

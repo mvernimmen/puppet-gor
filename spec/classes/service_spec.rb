@@ -1,6 +1,12 @@
 require 'spec_helper'
 
-describe 'gor' do
+describe 'gor', :type => 'class' do
+  let(:facts) { {
+    :operatingsystem           => 'RedHat',
+    :osfamily                  => 'RedHat',
+    :operatingsystemmajrelease => '6'
+  } }
+
   describe '#service_ensure' do
     context 'default' do
       let(:params) {{
@@ -28,6 +34,17 @@ describe 'gor' do
           :enable     => 'false',
           :hasrestart => 'false'
         )
+      }
+    end
+
+    context 'ignored' do
+      let(:params) {{
+        :args => { '--foo' => 'bar' },
+        :service_ensure => 'ignored',
+      }}
+
+      it {
+        is_expected.not_to contain_service('gor')
       }
     end
   end
