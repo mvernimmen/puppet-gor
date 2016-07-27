@@ -36,8 +36,8 @@ To install a specific version of the Gor package:
 check https://github.com/buger/gor/releases
 ```puppet
 class { 'gor':
-  version       => '0.10.1',
-  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
+  version       => '0.14.1',
+  digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
   …
 }
@@ -51,22 +51,13 @@ class { 'gor':
 }
 ```
 
-To install only the Gor package without having a gor service running:
-```puppet
-class { 'gor':
-  version       => '0.10.1',
-  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
-  digest_type   => 'md5'
-}
-```
-
 To install the Gor package with a gor service but that can only be started manually:
 ```puppet
 class { 'gor':
-  version       => '0.10.1',
-  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
+  version       => '0.14.1',
+  digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
-  service_ensure => 'stopped',
+  service_ensure => 'ignored',
   args => {
     '-input-raw'             => 'localhost:7999',
     '-output-http-header'    => 'User-Agent: gor',
@@ -80,8 +71,8 @@ class { 'gor':
 To install the Gor package with a gor service running that always send requests to https://staging.example.com
 ```puppet
 class { 'gor':
-  version       => '0.10.1',
-  digest_string => '6d7a23e5ae97edec6fa389cdee9546be',
+  version       => '0.14.1',
+  digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
   args => {
     '-input-raw'             => 'localhost:7999',

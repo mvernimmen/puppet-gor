@@ -19,15 +19,15 @@ class gor::service {
   }
 
   if $::osfamily == 'RedHat' and $::operatingsystem != 'Fedora' {
-    if $::operatingsystemrelease =~ /^6.*/  {
+    if $::operatingsystemmajrelease == '6'  {
       $provider = 'upstart'
-    } elsif $::operatingsystemrelease =~ /^7.*/  {
+    } elsif $::operatingsystemmajrelease == '7'  {
       $provider = 'systemd'
     }
   }
 
 
-  if !$service_enable {
+  if $service_ensure == 'ignored' {
     if $provider == 'upstart' {
       file { '/etc/init/gor.override':
         ensure  => $override_ensure,
@@ -35,8 +35,6 @@ class gor::service {
       }
     }
   } else {
-    # don't try to stop the service if it was started through capistrano
-    # or manually
     # Disable `hasrestart` because upstart's `initctl restart` doesn't reload
     # the config to pick up the new `exec` command when our arguments change.
     service { 'gor':

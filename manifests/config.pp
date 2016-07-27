@@ -24,7 +24,7 @@ class gor::config {
   }
 
   if $::osfamily == 'RedHat' and $::operatingsystem != 'Fedora' {
-    if $::operatingsystemrelease =~ /^6.*/  {
+    if $::operatingsystemmajrelease == '6'  {
       file { 'gor-conf':
         ensure  => $ensure,
         path    => '/etc/init/gor.conf',
@@ -32,7 +32,7 @@ class gor::config {
         content => template('gor/gor.upstart.erb'),
         require => File['/var/log/gor'],
       }
-    } elsif $::operatingsystemrelease =~ /^7.*/  {
+    } elsif $::operatingsystemmajrelease == '7'  {
       file { 'gor-conf':
         ensure  => $ensure,
         path    => '/lib/systemd/system/gor.service',
