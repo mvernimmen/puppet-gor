@@ -26,7 +26,7 @@
     },
     {
       "name":"camptocamp-archive",
-      "version_requirement":">= 0.8.x"
+      "version_requirement":">= 0.8.1"
     }
   ]
 }
