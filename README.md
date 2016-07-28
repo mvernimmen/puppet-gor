@@ -1,9 +1,10 @@
-# gor
+
+# puppet-gor [![CircleCI](https://circleci.com/gh/meltwater/puppet-gor.svg?style=svg)](https://circleci.com/gh/meltwater/puppet-gor)
 
 Puppet module for [Gor](https://github.com/buger/gor/).
 
 Installs Gor, configures an upstart job with the appropriate arguments, and
-starts the service. You will need to provide your own `gor` package.
+starts the service.
 
 ## Example usage
 
