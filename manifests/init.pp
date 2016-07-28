@@ -32,6 +32,7 @@ class gor (
   $digest_string  = 'ced467f51da7491a227b871c9894d351',
   $digest_type    = 'md5',
   $source_url     = undef,
+  $manage_service = true,
   $service_ensure = running,
   $envvars        = {},
   $binary_path    = '/usr/local/bin/gor',

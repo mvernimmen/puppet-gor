@@ -3,7 +3,8 @@
 # Private class. Should not be called directly.
 #
 class gor::service {
-  $args = $::gor::args
+  $args           = $::gor::args
+  $manage_service = $::gor::manage_service
 
   if empty($args) {
     $override_ensure = absent
@@ -27,7 +28,7 @@ class gor::service {
   }
 
 
-  if $service_ensure == 'ignored' {
+  if !$manage_service {
     if $provider == 'upstart' {
       file { '/etc/init/gor.override':
         ensure  => $override_ensure,

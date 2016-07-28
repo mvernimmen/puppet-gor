@@ -37,10 +37,10 @@ describe 'gor', :type => 'class' do
       }
     end
 
-    context 'ignored' do
+    context 'service not managed' do
       let(:params) {{
         :args => { '--foo' => 'bar' },
-        :service_ensure => 'ignored',
+        :manage_service => false,
       }}
 
       it {
