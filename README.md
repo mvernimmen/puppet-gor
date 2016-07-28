@@ -43,10 +43,41 @@ class { 'gor':
 }
 ```
 
+To install a specific version of the Gor package from a custom source url:
+check https://github.com/buger/gor/releases
+```puppet
+class { 'gor':
+  version       => '0.14.1',
+  source_url    => 'https://github.com/buger/gor/releases/download/v0.14.1/gor_v0.14.1_x64.tar.gz'
+  digest_string => 'ced467f51da7491a227b871c9894d351',
+  digest_type   => 'md5',
+  …
+}
+```
+
+To install gor to a different bin location:
+```puppet
+class { 'gor':
+  binary_path => '/usr/bin/gor', # default: '/usr/local/bin/gor'
+  …
+}
+```
+
+To set custom environment variables in the start scripts:
+```puppet
+class { 'gor':
+  envvars => {
+    'GODEBUG' => 'netdns=go',
+    'FOO'     => 'bar',
+  }
+  …
+}
+```
+
 To prevent the service from starting:
 ```puppet
 class { 'gor':
-  service_ensure => 'stopped',
+  manage_service => false,
   …
 }
 ```
@@ -57,7 +88,7 @@ class { 'gor':
   version       => '0.14.1',
   digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
-  service_ensure => 'ignored',
+  manage_service => false,
   args => {
     '-input-raw'             => 'localhost:7999',
     '-output-http-header'    => 'User-Agent: gor',
