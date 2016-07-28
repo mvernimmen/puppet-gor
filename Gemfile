@@ -14,5 +14,4 @@ end
 group :development do
   gem "travis"
   gem "travis-lint"
-  gem "guard-rake"
 end
