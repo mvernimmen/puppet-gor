@@ -36,10 +36,10 @@ class gor (
   $service_ensure = running,
   $envvars        = {},
   $binary_path    = '/usr/local/bin/gor',
-  $args           = undef
+  $args           = {}
 ) {
 
-  if $service_ensure and $service_ensure != stopped  {
+  if $manage_service {
     validate_hash($args)
     if empty($args) {
       fail("${title}: args param is empty")

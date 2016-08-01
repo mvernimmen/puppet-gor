@@ -1,6 +1,6 @@
 {
   "name": "meltwater-gor",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "meltwater",
   "summary": "Puppet module for installing and configuring the Gor replay tool.",
   "description": "Puppet module for installing and configuring the Gor replay tool.",

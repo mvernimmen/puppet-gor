@@ -1,5 +1,11 @@
 
-# puppet-gor [![CircleCI](https://circleci.com/gh/meltwater/puppet-gor.svg?style=svg)](https://circleci.com/gh/meltwater/puppet-gor)
+# puppet-gor
+[![Puppet Forge Version](http://img.shields.io/puppetforge/v/meltwater/gor.svg)](https://forge.puppetlabs.com/meltwater/gor)
+[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/meltwater/gor.svg)](https://forge.puppetlabs.com/meltwater/gor)
+[![CircleCI branch](https://img.shields.io/circleci/project/meltwater/puppet-gor/master.svg)]()
+[![By Meltwater](https://img.shields.io/badge/by-meltwater-28bbbb.svg)](http://underthehood.meltwater.com/)
+[![Maintenance](https://img.shields.io/maintenance/yes/2016.svg)]()
+[![license](https://img.shields.io/github/license/meltwater/puppet-gor.svg)]()
 
 Puppet module for [Gor](https://github.com/buger/gor/).
 
@@ -10,7 +16,7 @@ starts the service.
 
 Pass some arguments:
 ```puppet
-class { 'gor':
+class { '::gor':
   args => {
     '-input-raw'             => 'localhost:7999',
     '-output-http-header'    => 'User-Agent: gor',
@@ -23,7 +29,7 @@ class { 'gor':
 
 The same argument can be specified multiple times by passing an array:
 ```puppet
-class { 'gor':
+class { '::gor':
   args => {
     …
     '-output-http-method' => [
@@ -36,7 +42,7 @@ class { 'gor':
 To install a specific version of the Gor package:
 check https://github.com/buger/gor/releases
 ```puppet
-class { 'gor':
+class { '::gor':
   version       => '0.14.1',
   digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
@@ -47,7 +53,7 @@ class { 'gor':
 To install a specific version of the Gor package from a custom source url:
 check https://github.com/buger/gor/releases
 ```puppet
-class { 'gor':
+class { '::gor':
   version       => '0.14.1',
   source_url    => 'https://github.com/buger/gor/releases/download/v0.14.1/gor_v0.14.1_x64.tar.gz'
   digest_string => 'ced467f51da7491a227b871c9894d351',
@@ -58,7 +64,7 @@ class { 'gor':
 
 To install gor to a different bin location:
 ```puppet
-class { 'gor':
+class { '::gor':
   binary_path => '/usr/bin/gor', # default: '/usr/local/bin/gor'
   …
 }
@@ -66,7 +72,7 @@ class { 'gor':
 
 To set custom environment variables in the start scripts:
 ```puppet
-class { 'gor':
+class { '::gor':
   envvars => {
     'GODEBUG' => 'netdns=go',
     'FOO'     => 'bar',
@@ -77,7 +83,7 @@ class { 'gor':
 
 To prevent the service from starting:
 ```puppet
-class { 'gor':
+class { '::gor':
   manage_service => false,
   …
 }
@@ -85,7 +91,7 @@ class { 'gor':
 
 To install the Gor package with a gor service but that can only be started manually:
 ```puppet
-class { 'gor':
+class { '::gor':
   version       => '0.14.1',
   digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
@@ -102,7 +108,7 @@ class { 'gor':
 
 To install the Gor package with a gor service running that always send requests to https://staging.example.com
 ```puppet
-class { 'gor':
+class { '::gor':
   version       => '0.14.1',
   digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
