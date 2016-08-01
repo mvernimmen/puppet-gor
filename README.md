@@ -2,10 +2,10 @@
 # puppet-gor
 [![Puppet Forge Version](http://img.shields.io/puppetforge/v/meltwater/gor.svg)](https://forge.puppetlabs.com/meltwater/gor)
 [![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/meltwater/gor.svg)](https://forge.puppetlabs.com/meltwater/gor)
-[![CircleCI branch](https://img.shields.io/circleci/project/meltwater/puppet-gor/master.svg)]()
+[![CircleCI branch](https://img.shields.io/circleci/project/meltwater/puppet-gor/master.svg)](https://circleci.com/gh/meltwater/puppet-gor)
 [![By Meltwater](https://img.shields.io/badge/by-meltwater-28bbbb.svg)](http://underthehood.meltwater.com/)
-[![Maintenance](https://img.shields.io/maintenance/yes/2016.svg)]()
-[![license](https://img.shields.io/github/license/meltwater/puppet-gor.svg)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2016.svg)](https://github.com/meltwater/puppet-gor/commits/master)
+[![license](https://img.shields.io/github/license/meltwater/puppet-gor.svg)](https://github.com/meltwater/puppet-gor/blob/master/LICENSE)
 
 Puppet module for [Gor](https://github.com/buger/gor/).
 
