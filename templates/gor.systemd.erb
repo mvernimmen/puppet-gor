@@ -11,7 +11,7 @@ ExecStart=<%= @binary_path %> \
   <%=
 @args.sort.map { |k,v|
   [v].flatten.map { |i|
-    "#{k}='#{i}'"
+    "#{k} #{i}"
   }
 }.join(" \\\n  ")
 %> \
