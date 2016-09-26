@@ -4,14 +4,17 @@ After=network.target
 Wants=network.target
 
 [Service]
-<%  @envvars.each do |k, v| %>
+<%  @envvars.each do |k, v| -%>
 <%="Environment=#{k}='#{v}'" -%>
-<%  end %>
-ExecStart=<%= @binary_path %> \
+<%  end -%>
+User=<%= @gor_runuser %>
+MemoryAccounting=true
+MemoryLimit=<%= @gor_memorylimit %>
+ExecStart=<%= @binary_path %>/gor \
   <%=
 @args.sort.map { |k,v|
   [v].flatten.map { |i|
-    "#{k}='#{i}'"
+    "#{k} #{i}"
   }
 }.join(" \\\n  ")
 %> \
@@ -19,3 +22,4 @@ ExecStart=<%= @binary_path %> \
 
 [Install]
 WantedBy=multi-user.target
+

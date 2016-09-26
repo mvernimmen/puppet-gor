@@ -10,7 +10,7 @@ respawn limit 5 20
 <%=   "env #{k}='#{v}'" -%>
 <%  end %>
 
-exec <%= @binary_path %> \
+exec <%= @binary_path %>/gor \
   <%=
 @args.sort.map { |k,v|
   [v].flatten.map { |i|
