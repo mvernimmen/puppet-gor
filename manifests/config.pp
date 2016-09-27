@@ -10,9 +10,10 @@ class gor::config {
     $ensure = $::gor::ensure
   }
 
-  $binary_path = $::gor::binary_path
-  $envvars     = $::gor::envvars
-  $gor_runuser = $::gor::runuser
+  $binary_path     = $::gor::binary_path
+  $envvars         = $::gor::envvars
+  $gor_memorylimit = $::gor::memory_limit
+  $gor_runuser     = $::gor::runuser
 
   $log_ensure = $ensure ? {
     present => directory,

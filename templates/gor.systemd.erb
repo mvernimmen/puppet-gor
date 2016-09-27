@@ -8,6 +8,8 @@ Wants=network.target
 <%="Environment=#{k}='#{v}'" -%>
 <%  end %>
 User=<%= @gor_runuser %>
+MemoryAccounting=true
+MemoryLimit=<%= @gor_memorylimit %>
 ExecStart=<%= @binary_path %> \
   <%=
 @args.sort.map { |k,v|
@@ -20,3 +22,4 @@ ExecStart=<%= @binary_path %> \
 
 [Install]
 WantedBy=multi-user.target
+
