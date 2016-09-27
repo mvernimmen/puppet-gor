@@ -41,7 +41,7 @@
 class gor (
   $ensure         = present,
   $version        = '0.15.1',
-  $digest_string  = 'ced467f51da7491a227b871c9894d351',
+  $digest_string  = '0c0335a323c416569f030f46a7541045',
   $digest_type    = 'md5',
   $source_url     = undef,
   $manage_service = true,

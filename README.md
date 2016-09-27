@@ -44,7 +44,7 @@ check https://github.com/buger/gor/releases
 ```puppet
 class { '::gor':
   version       => '0.14.1',
-  digest_string => 'ced467f51da7491a227b871c9894d351',
+  digest_string => '0c0335a323c416569f030f46a7541045',
   digest_type   => 'md5',
   …
 }
