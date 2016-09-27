@@ -4,9 +4,9 @@ After=network.target
 Wants=network.target
 
 [Service]
-<%  @envvars.each do |k, v| %>
+<%  @envvars.each do |k, v| -%>
 <%="Environment=#{k}='#{v}'" -%>
-<%  end %>
+<%  end -%>
 User=<%= @gor_runuser %>
 MemoryAccounting=true
 MemoryLimit=<%= @gor_memorylimit %>
