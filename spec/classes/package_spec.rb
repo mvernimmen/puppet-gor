@@ -13,7 +13,7 @@ describe 'gor', :type => 'class' do
         :args => { '--foo' => 'bar' },
       }}
 
-      it { should contain_archive('gor-0.14.1').with_ensure('present') }
+      it { should contain_archive('gor-0.15.1').with_ensure('present') }
     end
 
     context '1.2.3' do
