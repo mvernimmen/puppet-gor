@@ -49,7 +49,7 @@ class gor (
   $runuser        = 'root',
   $service_ensure = running,
   $envvars        = {},
-  $binary_path    = '/usr/local/bin/',
+  $binary_path    = '/usr/local/bin',
   $args           = {}
 ) {
 
