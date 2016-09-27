@@ -7,6 +7,7 @@ class gor::package {
   $version       = $::gor::version
   $digest_string = $::gor::digest_string
   $digest_type   = $::gor::digest_type
+  $runuser       = $::gor::runuser
   $source_url    = $::gor::source_url
 
   $source_url_real = $source_url ? {
@@ -24,4 +25,16 @@ class gor::package {
     digest_type      => $digest_type,
     src_target       => '/tmp',
   }
+
+  # If gor is not running as root, set up permissions to capture traffic
+  if ($runuser != 'root') {
+    exec { 'setcap "cap_net_raw,cap_net_admin+eip" /usr/local/bin/gor':
+      path        => ['/sbin', '/usr/sbin'],
+      subscribe   => Archive["gor-$version}"],
+      refreshonly => true,
+    }
+  }
+
+
 }
+
