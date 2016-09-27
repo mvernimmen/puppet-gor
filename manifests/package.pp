@@ -25,6 +25,7 @@ class gor::package {
     digest_string    => $digest_string,
     digest_type      => $digest_type,
     src_target       => '/tmp',
+    root_dir         => '.',
   }
 
   # If gor is not running as root, set up permissions to capture traffic
