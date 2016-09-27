@@ -19,7 +19,10 @@
 #   be used to turn on debugging options.
 #
 # [*runuser*]
-#   Defines as which user gor executable should be running.
+#   Defines as which user gor executable should be running. You need to make
+#   sure the user already exists. If this is set to something other than
+#   'root' (the default) then gor will also be given capabilities through
+#   capset to do it's thing.
 #
 # [*service_ensure*]
 #   Ensure parameter to pass to the service.
