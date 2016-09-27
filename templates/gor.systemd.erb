@@ -10,7 +10,7 @@ Wants=network.target
 User=<%= @gor_runuser %>
 MemoryAccounting=true
 MemoryLimit=<%= @gor_memorylimit %>
-ExecStart=<%= @binary_path %> \
+ExecStart=<%= @binary_path %>/gor \
   <%=
 @args.sort.map { |k,v|
   [v].flatten.map { |i|

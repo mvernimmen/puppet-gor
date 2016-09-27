@@ -65,7 +65,7 @@ class { '::gor':
 To install gor to a different bin location:
 ```puppet
 class { '::gor':
-  binary_path => '/usr/bin/gor', # default: '/usr/local/bin/gor'
+  binary_path => '/usr/bin', # default: '/usr/local/bin'
   …
 }
 ```
