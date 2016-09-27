@@ -54,8 +54,8 @@ To install a specific version of the Gor package from a custom source url:
 check https://github.com/buger/gor/releases
 ```puppet
 class { '::gor':
-  version       => '0.14.1',
-  source_url    => 'https://github.com/buger/gor/releases/download/v0.14.1/gor_v0.14.1_x64.tar.gz'
+  version       => '0.15.1',
+  source_url    => 'https://github.com/buger/gor/releases/download/v0.15.1/gor_v0.15.1_x64.tar.gz'
   digest_string => 'ced467f51da7491a227b871c9894d351',
   digest_type   => 'md5',
   …
@@ -77,6 +77,15 @@ class { '::gor':
     'GODEBUG' => 'netdns=go',
     'FOO'     => 'bar',
   }
+  …
+}
+```
+
+To run gor under a normal user account and limit gor's memory usage:
+```puppet
+class { '::gor':
+  memory_limit => '100M',
+  runuser      => 'gor',
   …
 }
 ```
