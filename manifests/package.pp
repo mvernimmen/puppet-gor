@@ -30,7 +30,7 @@ class gor::package {
   if ($runuser != 'root') {
     exec { 'setcap "cap_net_raw,cap_net_admin+eip" /usr/local/bin/gor':
       path        => ['/sbin', '/usr/sbin'],
-      subscribe   => Archive["gor-$version}"],
+      subscribe   => Archive["gor-${version}"],
       refreshonly => true,
     }
   }
